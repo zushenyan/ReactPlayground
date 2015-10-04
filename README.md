@@ -1,7 +1,7 @@
 # ReactPlayground
 React:heart:Everything
 
-It's simply a playground for experiment with Reactjs.
+A playground for experiment with Reactjs.
 
 #### [React<3Bootstrap](http://zushenyan.github.io/ReactPlayground/src/react_loves_bootstrap/react_loves_bootstrap.html)
 
