@@ -20,20 +20,6 @@
 		<script src="../../lib/jquery-2.1.4.min.js"></script>
 		<script src="../../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 		<script type="text/babel">
-			"use strict";
-			let placeholder = (function(){
-				let games = [];
-				for(let i = 0; i < 50; i++){
-					let name = "test" + i.toString();
-					let image = "http://placehold.it/140x196";
-					let viewers = Math.floor(Math.random() * 10000);
-					games.push(
-						{name: name, image: image, viewers: viewers}
-					);
-				}
-				return games;
-			})();
-
 			let GameItem = React.createClass({
 				render: function(){
 					return (
