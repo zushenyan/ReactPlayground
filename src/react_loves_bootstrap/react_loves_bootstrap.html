@@ -3,17 +3,21 @@
 	<head>
 		<title>React &#60;3 Bootstrap</title>
 		<link rel="stylesheet" href="../../lib/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./style.css">
 		<script src="../../lib/react-0.13.3/build/react.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
-			<div class="row">
+			<div class="row vertical-centering">
 				<div class="col-xs-4"></div>
 				<div id="app" class="col-xs-4"></div>
 				<div class="col-xs-4"></div>
 			</div>
 		</div>
+
+		<script src="../../lib/jquery-2.1.4.min.js"></script>
+		<script src="../../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 		<script type="text/babel">
 			let products = [
 				{category: "Sport", name: "Basketball", price: 3.45},
@@ -112,8 +116,5 @@
 				document.getElementById("app")
 			);
 		</script>
-
-		<script src="../../lib/jquery-2.1.4.min.js"></script>
-		<script src="../../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	</body>
 </html>
