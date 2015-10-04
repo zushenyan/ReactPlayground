@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>React &#60;3 Twitch</title>
+		<link rel="stylesheet" href="../../lib/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./style.css">
+		<script src="../../lib/react-0.13.3/build/react.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					<div id="gameComponent"></div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../lib/jquery-2.1.4.min.js"></script>
+		<script src="../../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script type="text/babel">
+			"use strict";
+			let placeholder = (function(){
+				let games = [];
+				for(let i = 0; i < 50; i++){
+					let name = "test" + i.toString();
+					let image = "http://placehold.it/140x196";
+					let viewers = Math.floor(Math.random() * 10000);
+					games.push(
+						{name: name, image: image, viewers: viewers}
+					);
+				}
+				return games;
+			})();
+
+			let GameItem = React.createClass({
+				render: function(){
+					return (
+						<div className="game">
+							<div><img src={ this.props.image } /></div>
+							<div className="gameTitle">{ this.props.name }</div>
+							<div>{ this.props.viewers } viewers</div>
+						</div>
+					);
+				}
+			});
+
+			let GameList = React.createClass({
+				render: function(){
+					let nodes = [];
+					let filterText = this.props.filterText;
+					this.props.games.forEach((game) => {
+						if(game.game.name.indexOf(filterText) === -1){
+							return;
+						}
+						nodes.push(
+							<GameItem
+							name={ game.game.name }
+							image={ game.game.box["medium"] }
+							viewers={ game.viewers }
+							key={ game.game.name }
+							/>
+						 );
+					});
+
+					return (
+						<div className="flexbox">
+							{nodes}
+						</div>
+					);
+				}
+			});
+
+			let SearchBar = React.createClass({
+				handleChange: function(){
+					this.props.userInput(this.refs.filterTextInput.getDOMNode().value);
+				},
+				render: function(){
+					return (
+						<form>
+							<input
+							type="text"
+							className="form-control"
+							ref="filterTextInput"
+							value={ this.props.value }
+							placeholder="Search Games"
+							onChange={ this.handleChange }
+							/>
+						</form>
+					);
+				}
+			});
+
+			let MoreGameButton = React.createClass({
+				handleClick: function(){
+					controller.requestMoreGames();
+				},
+				render: function(){
+					return (
+						<div>
+							<button className="btn btn-primary btn-lg btn-block" onClick={ this.handleClick }>Load More</button>
+						</div>
+					);
+				}
+			});
+
+			let GameComponent = React.createClass({
+				getInitialState: function(){
+					return {
+						userInput: "",
+						games: this.props.games
+					};
+				},
+				updateGameList: function(gameList){
+					this.setState({
+						userInput: this.state.userInput,
+						games: gameList
+					});
+				},
+				handleUserInput: function(filterText){
+					this.setState({
+						userInput: filterText,
+						games: this.props.games
+					});
+				},
+				render: function(){
+					return (
+						<div>
+							<SearchBar userInput={ this.handleUserInput } value={ this.state.userInput } />
+							<GameList games={ this.props.games } filterText={ this.state.userInput } />
+							<MoreGameButton />
+						</div>
+					);
+				}
+			});
+
+			let controller = {
+				_lastResponse: null,
+				_lastGameList: [],
+				requestMoreGames: function(){
+					ajaxRequest(
+						this._lastResponse,
+						(result) => {
+						this._lastResponse = result;
+						this._lastGameList = this._lastGameList.concat(result.top);
+						React.render(
+							<GameComponent games={ this._lastGameList } />,
+							document.getElementById("gameComponent")
+						);},
+						(error) => {
+							React.render(
+								(<div>Oops, Error happens: { error }</div>),
+								document.getElementById("gameComponent")
+							);
+						}
+					);
+
+					function ajaxRequest(lastResponse, successCallback, errorCallback){
+						let site = lastResponse ? lastResponse._links["next"] : "https://api.twitch.tv/kraken/games/top";
+						let ajax = new XMLHttpRequest();
+						ajax.addEventListener("readystatechange", () => {
+							if(ajax.readyState === 4){
+								if(ajax.status === 200){
+									let result = JSON.parse(ajax.responseText);
+									successCallback(result);
+								}
+							}
+						});
+						ajax.addEventListener("error", (e) => {
+							errorCallback(e);
+						});
+						ajax.open("GET", site);
+						ajax.setRequestHeader("Accept", "application/vnd.twitchtv.v3+json");
+						ajax.send();
+					}
+				}
+			};
+
+			controller.requestMoreGames();
+		</script>
+	</body>
+</html>
