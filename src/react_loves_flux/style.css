@@ -1,0 +1,28 @@
+body {
+  padding-top: 70px;
+}
+
+header {
+  text-align: center;
+}
+
+header h1 {
+  margin: 20px 0 40px 0;
+}
+
+.navbar-brand {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.panel {
+  text-align: center;
+}
+
+.color {
+  color: orange;
+}

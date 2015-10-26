@@ -11,4 +11,10 @@ No, it's not [React-Bootstrap](https://react-bootstrap.github.io/). It's simply 
 
 React x Bootstrap x Twitch.
 
-It uses Twitch RESTful API to retrieve top games json data.
+Uses Twitch RESTful API to retrieve top games JSON data.
+
+#### [React<3Flux](http://zushenyan.github.io/ReactPlayground/src/react_loves_flux/react_loves_flux.html)
+
+React x Flux.
+
+Uses Flux architecture to build an widget. For more informations about Predefined Color Picker please visit [here](https://github.com/zushenyan/Predefined-Color-Picker).

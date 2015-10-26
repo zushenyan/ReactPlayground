@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React &#60;3 Flux</title>
+		<link rel="stylesheet" href="../../lib/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./style.css">
+		<link rel="stylesheet" href="./pcp-0.2.5/css/Main.min.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Predefined Color Picker 0.2.5</a>
+				</div>
+			</div>
+		</nav>
+
+		<header class="container">
+			<h1>For more info please visit <a href="https://github.com/zushenyan/Predefined-Color-Picker">Predefined Color Picker</a></h1>
+		</header>
+
+		<main class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<section class="panel panel-primary">
+						<div class="panel-heading">React Template</div>
+						<div class="panel-body">
+							<div id="pcp1"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<section class="panel panel-primary">
+						<div class="panel-heading">Native Template</div>
+						<div class="panel-body">
+							<div id="pcp2"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<section class="panel panel-primary">
+						<div class="panel-heading">Simple Template (see result in console)</div>
+						<div class="panel-body">
+							<div id="pcp3"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<section class="panel panel-primary">
+						<div class="panel-heading">User Defined Template (aka. Plug-in)</div>
+						<div class="panel-body">
+							<div id="pcp4"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<section class="panel panel-primary">
+						<div class="panel-heading">Type <span class="color">mypcp1.set({id: "pcp5"})</span> In Console To See What Will Happen!</div>
+						<div class="panel-body">
+							<div id="pcp5"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+		</main>
+
+		<script src="../../lib/jquery-2.1.4.min.js"></script>
+		<script src="../../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+		<script src="./pcp-0.2.5/js/Main.min.js"></script>
+		<script src="./MyTemplate-cmp.js"></script>
+		<script>
+			var palette = [
+				{color: "", name: "C"},
+				{color: "", name: "A"},
+				{color: "", name: "T"},
+			];
+			var selector = [
+				{color: "#123123", name: "M"},
+				{color: "#654321", name: "O"},
+				{color: "#123456", name: "E"},
+				{color: "#345654", name: "W"}
+			];
+
+			var mypcp1 = new pcp.PCP({id: "pcp1", template: pcp.ReactTemplate});
+			var mypcp2 = new pcp.PCP({id: "pcp2", palette: palette, selector: selector, template: pcp.NativeTemplate});
+			var mypcp3 = new pcp.PCP({id: "pcp3", palette: palette, template: pcp.SimpleTemplate});
+			var mypcp4 = new pcp.PCP({id: "pcp4", template: MyTemplate});
+		</script>
+	</body>
+</html>
