@@ -16,3 +16,9 @@ Uses Twitch RESTful API to retrieve top games JSON data.
 #### [React<3Flux](http://zushenyan.github.io/ReactPlayground/src/react_loves_flux/react_loves_flux.html)
 
 Uses Flux architecture to build an widget. For more informations about Predefined Color Picker please visit [here](https://github.com/zushenyan/Predefined-Color-Picker).
+
+#### [React<3NRChat](https://github.com/zushenyan/NRChat)
+
+Use React & Redux architecture to build a simple chat room.
+
+[Redux](https://github.com/rackt/redux) is an implementation of Flux and it's even more favored than Flux.
